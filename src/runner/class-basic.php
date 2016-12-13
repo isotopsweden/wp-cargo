@@ -11,7 +11,7 @@ class Basic extends Abstract_Runner {
 		$pusher   = $this->cargo->make( 'pusher' );
 		$database = $this->cargo->make( 'database' );
 
-		foreach ( $database->get_items() as $item ) {
+		foreach ( $database->all() as $item ) {
 			// Bail if we don't get a true when we run through all items.
 			if ( $res = $pusher->send( $item->data ) ) {
 				if ( is_wp_error( $res ) ) {
