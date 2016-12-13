@@ -4,8 +4,8 @@
  * Plugin Name: Cargo
  * Plugin URI: https://github.com/isotopsweden/wp-cargo
  * Description: Cargo will push content to other services.
- * Author: Fredrik Forsmo
- * Author URI: https://github.com/frozzare
+ * Author: Isotop
+ * Author URI: https://www.isotop.se
  * Version: 1.0.0
  * Textdomain: wp-cargo
  */
