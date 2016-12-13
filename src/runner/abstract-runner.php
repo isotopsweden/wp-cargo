@@ -37,9 +37,31 @@ abstract class Abstract_Runner implements Runner_Interface {
 	 *
 	 * @param string $message
 	 */
-	protected function log( $message ) {
+	protected function log_error( $message ) {
 		if ( $this->cli() ) {
 			\WP_CLI::error( $message );
+		}
+	}
+
+	/**
+	 * Log error to WP CLI.
+	 *
+	 * @param string $message
+	 */
+	protected function log_info( $message ) {
+		if ( $this->cli() ) {
+			\WP_CLI::info( $message );
+		}
+	}
+
+	/**
+	 * Log success to WP CLI.
+	 *
+	 * @param string $message
+	 */
+	protected function log_success( $message ) {
+		if ( $this->cli() ) {
+			\WP_CLI::success( $message );
 		}
 	}
 
