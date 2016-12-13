@@ -14,7 +14,7 @@ composer require isotopsweden/wp-cargo
 
 Example configuration:
 
-```
+```php
 /**
  * Set Cargo config.
  */
