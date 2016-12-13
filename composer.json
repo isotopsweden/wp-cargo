@@ -1,0 +1,49 @@
+{
+  "name": "wp-cargo",
+  "type": "wordpress-muplugin",
+  "license": "MIT",
+  "description": "Cargo will push content to other services",
+  "homepage": "https://github.com/isotopsweden/wp-cargo",
+  "authors": [
+    {
+      "name": "Fredrik Forsmo",
+      "email": "fredrik.forsmo@isotop.se",
+      "homepage": "https://github.com/frozzare"
+    }
+  ],
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "cargo",
+    "push",
+    "data",
+    "services"
+  ],
+  "autoload": {
+    "classmap": [
+      "src/"
+    ],
+    "files": [
+      "src/helpers.php",
+      "src/admin/actions.php"
+    ]
+  },
+  "require": {
+    "php": "^7.1",
+    "composer/installers": "~1.0",
+    "frozzare/tank": "^1.3"
+  },
+  "require-dev": {
+    "frozzare/wp-test-suite": "~1.0",
+    "isotopsweden/isotopcs": "dev-master"
+  },
+  "scripts": {
+    "config-isotopcs": [
+      "if [ -f vendor/bin/phpcs ]; then \"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs,../../../vendor/isotopsweden/isotopcs; fi",
+      "if [ -f vendor/bin/phpcs ]; then \"vendor/bin/phpcs\" --config-set default_standard Isotop; fi"
+    ],
+    "post-install-cmd": "composer config-isotopcs",
+    "post-update-cmd": "composer config-isotopcs"
+  },
+  "prefer-stable": true
+}
