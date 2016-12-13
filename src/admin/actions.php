@@ -46,7 +46,7 @@ function save_post_or_taxonomy( $id, $post = null ) {
 		$data['data'] = $post;
 	}
 
-	// Send post data to pusher.
+	// Send post or taxonomy data to pusher.
 	$res = $this->make( 'pusher' )->send( $data );
 
 	// Handle error.
