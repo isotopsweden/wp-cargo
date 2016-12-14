@@ -40,6 +40,11 @@ function save_post_or_taxonomy( $id, $post = null ) {
 		$data['type'] = 'taxonomy';
 		$data['data'] = $term;
 	} else {
+		// Don't publish revision posts.
+		if ( wp_is_post_revision( $id ) ) {
+			return;
+		}
+
 		$post         = (object) $post;
 		$post->meta   = get_post_meta( $id );
 		$data['type'] = 'post';
