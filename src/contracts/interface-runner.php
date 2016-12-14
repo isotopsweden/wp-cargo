@@ -10,7 +10,12 @@ interface Runner_Interface extends Driver_Interface {
 	public function bootstrap();
 
 	/**
-	 * Run the task.
+	 * Run all content task.
 	 */
-	public function run();
+	public function run_all();
+
+	/**
+	 * Run queued content task.
+	 */
+	public function run_queue();
 }

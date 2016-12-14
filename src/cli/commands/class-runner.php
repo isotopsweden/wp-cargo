@@ -9,6 +9,9 @@ class Runner extends Command {
 	/**
 	 * Run Cargo Runner.
 	 *
+	 * [--all]
+	 * : Try to push all content to the pusher.
+	 *
 	 * [--driver=<value>]
 	 * : The driver to use. Default is 'basic'.
 	 *
@@ -17,6 +20,11 @@ class Runner extends Command {
 	 */
 	public function run( $args, $assoc_args ) {
 		$driver = $assoc_args['driver'] ?? 'basic';
-		cargo()->make( sprintf( 'driver.runner.%s', $driver ) )->run();
+
+		if ( isset( $assoc_args['all'] ) ) {
+			cargo()->make( sprintf( 'driver.runner.%s', $driver ) )->run_all();
+		} else {
+			cargo()->make( sprintf( 'driver.runner.%s', $driver ) )->run_queue();
+		}
 	}
 }
