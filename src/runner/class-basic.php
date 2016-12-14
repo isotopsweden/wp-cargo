@@ -8,13 +8,15 @@ class Basic extends Abstract_Runner {
 	 * Run all content task.
 	 */
 	public function run_all() {
+		$pusher = $this->cargo->make( 'pusher' );
+
 		foreach ( $this->posts() as $post ) {
 			$post         = (object) $post;
 			$post->meta   = get_post_meta( $post );
 			$data['type'] = 'post';
 			$data['data'] = $post;
 
-			$this->cargo->make( 'pusher' )->send( $data );
+			$pusher->send( $data );
 			$this->log_info( sprintf( 'Pushed post with id %d to pusher', $post->ID ) );
 		}
 
@@ -24,7 +26,7 @@ class Basic extends Abstract_Runner {
 			$data['type'] = 'taxonomy';
 			$data['data'] = $term;
 
-			$this->cargo->make( 'pusher' )->send( $data );
+			$pusher->send( $data );
 			$this->log_info( sprintf( 'Pushed term with id %d to pusher', $term->ID ) );
 		}
 
@@ -35,10 +37,13 @@ class Basic extends Abstract_Runner {
 	 * Run queued content task.
 	 */
 	public function run_queue() {
-		foreach ( $this->cargo->make( 'database' )->all() as $item ) {
+		$database = $this->cargo->make( 'database' );
+		$pusher   = $this->cargo->make( 'pusher' );
+
+		foreach ( $database->all() as $item ) {
 			if ( ! empty( $item->data ) && cargo_is_json( $item->data ) ) {
 				// Bail if we don't get a true when we run through all items.
-				if ( $res = $this->cargo->make( 'pusher' )->send( $item->data ) ) {
+				if ( $res = $pusher->send( $item->data ) ) {
 					if ( is_wp_error( $res ) ) {
 						$this->log_error( $res );
 					} else {
@@ -54,7 +59,7 @@ class Basic extends Abstract_Runner {
 			}
 
 			// If it can be send delete it from the database.
-			if ( ! $this->cargo->make( 'database' )->delete( $item->id ) ) {
+			if ( ! $database->delete( $item->id ) ) {
 				$this->log_error( sprintf( 'Failed to delete item with id: %d', $item->id ) );
 			}
 		}
