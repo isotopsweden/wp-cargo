@@ -24,8 +24,7 @@
       "src/"
     ],
     "files": [
-      "src/helpers.php",
-      "src/admin/actions.php"
+      "src/helpers.php"
     ]
   },
   "require": {

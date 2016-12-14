@@ -47,13 +47,15 @@ class Cargo extends Container {
 	 * @param  int      $priority
 	 * @param  int      $accepted_args
 	 *
+	 * @throws Exception When WordPress is not loaded.
+	 *
 	 * @return bool
 	 */
 	public function action( string $tag, callable $fn, int $priority = 10, int $accepted_args = 1 ) {
 		$fn = Closure::bind( Closure::fromCallable( $fn ), $this );
 
 		if ( ! function_exists( 'add_action' ) ) {
-			return false;
+			throw new Exception( 'WordPress not loaded' );
 		}
 
 		return add_action( $tag, $fn, $priority, $accepted_args );
@@ -67,13 +69,15 @@ class Cargo extends Container {
 	 * @param  int      $priority
 	 * @param  int      $accepted_args
 	 *
+	 * @throws Exception When WordPress is not loaded.
+	 *
 	 * @return bool
 	 */
 	public function filter( string $tag, callable $fn, int $priority = 10, int $accepted_args = 1 ) {
 		$fn = Closure::bind( Closure::fromCallable( $fn ), $this );
 
 		if ( ! function_exists( 'add_filter' ) ) {
-			return false;
+			throw new Exception( 'WordPress not loaded' );
 		}
 
 		return add_filter( $tag, $fn, $priority, $accepted_args );

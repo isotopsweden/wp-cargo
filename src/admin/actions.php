@@ -58,8 +58,8 @@ function save_post_or_taxonomy( $id, $post = null ) {
 }
 
 // Handle posts.
-cargo()->action( 'save_post', __NAMESPACE__ . '\\save_post_or_taxonomy', 10, 2 );
+cargo()->action( 'save_post', __NAMESPACE__ . '\\save_post_or_taxonomy', 999, 2 );
 
 // Handle taxonomies.
-cargo()->action( 'created_term', __NAMESPACE__ . '\\save_post_or_taxonomy' );
-cargo()->action( 'edit_term', __NAMESPACE__ . '\\save_post_or_taxonomy' );
+cargo()->action( 'created_term', __NAMESPACE__ . '\\save_post_or_taxonomy', 999 );
+cargo()->action( 'edit_term', __NAMESPACE__ . '\\save_post_or_taxonomy', 999 );
