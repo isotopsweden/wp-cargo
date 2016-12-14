@@ -1,7 +1,7 @@
 <?php
 
 // Require WordPress files.
-require_once __DIR__ . '/src/admin/actions.php';
+require_once __DIR__ . '/admin/actions.php';
 
 // Bootstrap Cargo.
 cargo()->set_driver( 'database.mysql', '\\Isotop\\Cargo\\Database\\MySQL' );
