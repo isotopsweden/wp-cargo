@@ -50,7 +50,7 @@ abstract class Abstract_Runner implements Runner_Interface {
 	 */
 	protected function log_info( $message ) {
 		if ( $this->cli() ) {
-			\WP_CLI::info( $message );
+			\WP_CLI::log( $message );
 		}
 	}
 

@@ -13,6 +13,7 @@ class HTTP extends Abstract_Pusher {
 	 */
 	public function send( $data ) {
 		$options = $this->cargo->config( 'pusher.http', ['url' => ''] );
+		$options = is_array( $options ) ? $options : ['url' => ''];
 
 		$args = array_merge( [
 			'headers' => [

@@ -62,6 +62,11 @@ class MySQL extends Abstract_Database {
 	public function save( string $data ) {
 		global $wpdb;
 
+		// Bail if not a JSON string.
+		if ( ! cargo_is_json( $data ) ) {
+			return false;
+		}
+
 		return $wpdb->insert( $this->get_table(), ['data' => $data], ['%s'] );
 	}
 
