@@ -56,10 +56,11 @@ class MySQL extends Abstract_Database {
 	 * Save item with data to the database.
 	 *
 	 * @param  string $data
+	 * @param  string $error
 	 *
 	 * @return bool|int
 	 */
-	public function save( string $data ) {
+	public function save( string $data, string $error = '' ) {
 		global $wpdb;
 
 		// Bail if not a JSON string.
@@ -67,7 +68,7 @@ class MySQL extends Abstract_Database {
 			return false;
 		}
 
-		return $wpdb->insert( $this->get_table(), ['data' => $data], ['%s'] );
+		return $wpdb->insert( $this->get_table(), ['data' => $data, 'error' => $error, 'created_at' => current_time( 'mysql' )], ['%s', '%s', '%s'] );
 	}
 
 	/**
@@ -93,14 +94,20 @@ class MySQL extends Abstract_Database {
 			return;
 		}
 
-		$table_version     = 1;
+		$table_version     = 2;
 		$installed_version = intval( get_site_option( '_cargo_table_version', 0 ) );
 
 		if ( $installed_version !== $table_version ) {
+			global $wpdb;
+
+			$wpdb->query( "DROP TABLE IF EXISTS `{$this->get_table()}`" );
+
 			$sql = sprintf(
 				'CREATE TABLE %1$s (
 					id int(11) unsigned NOT NULL AUTO_INCREMENT,
 					data LONGTEXT NOT NULL,
+					error LONGTEXT,
+					created_at DATETIME NOT NULL,
 					PRIMARY KEY  (id)
 				) %2$s;',
 				$this->get_table(),

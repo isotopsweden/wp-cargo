@@ -27,7 +27,7 @@ class HTTP extends Abstract_Pusher {
 		$res = wp_remote_request( $options['url'], $args );
 
 		if ( is_wp_error( $res ) ) {
-			$this->save( $args['body'] );
+			$this->save( $args['body'], $res );
 
 			return $res;
 		}
@@ -38,6 +38,12 @@ class HTTP extends Abstract_Pusher {
 			return false;
 		}
 
-		return $body['success'];
+		if ( $body['success'] ) {
+			return true;
+		}
+
+		$this->save( $args['body'], $res );
+
+		return false;
 	}
 }

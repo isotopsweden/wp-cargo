@@ -57,8 +57,9 @@ abstract class Abstract_Database implements Database_Interface {
 	 * Save item with data to the database.
 	 *
 	 * @param  string $data
+	 * @param  string $error
 	 *
 	 * @return bool
 	 */
-	abstract public function save( string $data );
+	abstract public function save( string $data, string $error = '' );
 }

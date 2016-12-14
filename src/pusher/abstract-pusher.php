@@ -41,14 +41,16 @@ abstract class Abstract_Pusher implements Pusher_Interface {
 	 * Save data.
 	 *
 	 * @param mixed $data
+	 * @param mixed $error
 	 */
-	protected function save( $data ) {
-		$data = $this->to_json( $data );
+	protected function save( $data, $error = '' ) {
+		$data  = $this->to_json( $data );
+		$error = $this->to_json( $error );
 
 		if ( empty( $data ) ) {
 			return;
 		}
 
-		$this->cargo->make( 'database' )->save( $data );
+		$this->cargo->make( 'database' )->save( $data, $error );
 	}
 }
