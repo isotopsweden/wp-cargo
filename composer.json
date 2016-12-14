@@ -1,5 +1,5 @@
 {
-  "name": "wp-cargo",
+  "name": "isotopsweden/wp-cargo",
   "type": "wordpress-muplugin",
   "license": "MIT",
   "description": "Cargo will push content to other services",
