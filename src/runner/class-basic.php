@@ -2,6 +2,8 @@
 
 namespace Isotop\Cargo\Runner;
 
+use Isotop\Cargo\Content\Post;
+
 class Basic extends Abstract_Runner {
 
 	/**
@@ -11,22 +13,12 @@ class Basic extends Abstract_Runner {
 		$pusher = $this->cargo->make( 'pusher' );
 
 		foreach ( $this->posts() as $post ) {
-			$post         = (object) $post;
-			$post->meta   = get_post_meta( $post );
-			$data['type'] = 'post';
-			$data['data'] = $post;
-
-			$pusher->send( $data );
+			$pusher->send( new Post( $post ) );
 			$this->log_info( sprintf( 'Pushed post with id %d to pusher', $post->ID ) );
 		}
 
 		foreach ( $this->terms() as $term ) {
-			$term         = (object) $term;
-			$term->meta   = get_term_meta( $term );
-			$data['type'] = 'taxonomy';
-			$data['data'] = $term;
-
-			$pusher->send( $data );
+			$pusher->send( new Term( $term ) );
 			$this->log_info( sprintf( 'Pushed term with id %d to pusher', $term->ID ) );
 		}
 
