@@ -10,4 +10,11 @@ interface Content_Interface {
 	 * @return mixed
 	 */
 	public function get_json();
+
+	/**
+	 * Is the content data valid?
+	 *
+	 * @return bool
+	 */
+	public function valid_data();
 }
