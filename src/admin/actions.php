@@ -2,6 +2,9 @@
 
 namespace Isotop\Cargo\Admin;
 
+use Isotop\Cargo\Content\Post;
+use Isotop\Cargo\Content\Term;
+
 /**
  * Handle post or taxonomies save.
  *
@@ -26,29 +29,15 @@ function save_post_or_taxonomy( $id, $post = null ) {
 		return false;
 	}
 
-	$data = [];
-
 	if ( is_null( $post ) ) {
-		$term = get_term( $id, '' );
-
-		if ( is_wp_error( $term ) ) {
-			return false;
-		}
-
-		$term         = (object) $term;
-		$term->meta   = get_term_meta( $term );
-		$data['type'] = 'taxonomy';
-		$data['data'] = $term;
+		$data = new Term( $id );
 	} else {
 		// Don't publish revision posts.
 		if ( wp_is_post_revision( $id ) ) {
 			return;
 		}
 
-		$post         = (object) $post;
-		$post->meta   = get_post_meta( $id );
-		$data['type'] = 'post';
-		$data['data'] = $post;
+		$data = new Post( $id );
 	}
 
 	// Send post or taxonomy data to pusher.

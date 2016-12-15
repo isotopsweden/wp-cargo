@@ -4,6 +4,7 @@ namespace Isotop\Cargo\Pusher;
 
 use Isotop\Cargo\Cargo;
 use Isotop\Cargo\Contracts\Pusher_Interface;
+use Isotop\Cargo\Contracts\Content_Interface;
 
 abstract class Abstract_Pusher implements Pusher_Interface {
 
@@ -31,6 +32,10 @@ abstract class Abstract_Pusher implements Pusher_Interface {
 	 * @return string
 	 */
 	protected function to_json( $data ) {
+		if ( $data instanceof Content_Interface && $data->valid_data() ) {
+			return $data->get_json();
+		}
+
 		$data = is_string( $data ) ? $data : wp_json_encode( $data );
 		$data = is_string( $data ) ? $data : '';
 
