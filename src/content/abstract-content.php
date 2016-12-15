@@ -66,7 +66,7 @@ abstract class Abstract_Content implements Content_Interface {
 	 *
 	 * @return bool
 	 */
-	public function valid_data() {
+	protected function valid_data() {
 		return ! is_wp_error( $this->data ) && ! empty( $this->data );
 	}
 }
