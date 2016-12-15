@@ -3,6 +3,7 @@
 namespace Isotop\Cargo\Runner;
 
 use Isotop\Cargo\Content\Post;
+use Isotop\Cargo\Content\Term;
 
 class Basic extends Abstract_Runner {
 
