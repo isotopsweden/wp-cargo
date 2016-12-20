@@ -15,5 +15,10 @@ class Term extends Abstract_Content {
 
 		// Add meta data.
 		$this->add( 'meta', get_term_meta( $id ) );
+
+		// Add extra data.
+		$this->add( 'extra', [
+			'site_id' => get_current_blog_id()
+		] );
 	}
 }

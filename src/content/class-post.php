@@ -22,7 +22,8 @@ class Post extends Abstract_Content {
 
 		// Add extra data.
 		$this->add( 'extra', [
-			'permalink' => get_permalink( $post )
+			'permalink' => get_permalink( $post ),
+			'site_id'   => get_current_blog_id()
 		] );
 	}
 }
