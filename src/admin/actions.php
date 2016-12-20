@@ -33,11 +33,6 @@ function save_post_or_taxonomy( $id, $post = null ) {
 	if ( is_null( $post ) ) {
 		$data = new Term( $id );
 	} else {
-		// Don't publish revision posts.
-		if ( wp_is_post_revision( $id ) ) {
-			return;
-		}
-
 		$data = new Post( $id );
 	}
 

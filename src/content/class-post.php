@@ -10,6 +10,11 @@ class Post extends Abstract_Content {
 	 * @param mixed $post
 	 */
 	public function __construct( $post ) {
+		// Bail if empty.
+		if ( empty( $post ) ) {
+			return;
+		}
+
 		// Bail if a revision post.
 		if ( wp_is_post_revision( $post ) ) {
 			return;

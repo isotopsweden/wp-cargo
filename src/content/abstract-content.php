@@ -28,7 +28,7 @@ abstract class Abstract_Content implements Content_Interface {
 	 */
 	public function create( string $type, $data ) {
 		$this->type = $type;
-		$this->data = is_array( $data ) ? $data : [];
+		$this->data = (array) $data;
 	}
 
 	/**

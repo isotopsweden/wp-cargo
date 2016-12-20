@@ -19,7 +19,6 @@ class Menu extends Abstract_Content {
 			];
 		}
 
-
 		// Create menu object.
 		$this->create( 'menu', $result );
 	}
@@ -41,14 +40,15 @@ class Menu extends Abstract_Content {
 			}
 
 			$result[] = [
-				'id'       => $item->ID,
-				'url'      => $item->url,
-				'title'    => $item->title,
-				'target'   => $item->target,
-				'classes'  => $item->classes,
-				'type'     => $item->object === 'page' ? 'post' : $item->object,
-				'parent'   => 0,
-				'children' => $this->get_menu_children( $menu, $item->ID )
+				'id'        => $item->ID,
+				'url'       => $item->url,
+				'title'     => $item->title,
+				'target'    => $item->target,
+				'classes'   => array_filter( (array) $item->classes ),
+				'type'      => $item->object === 'page' ? 'post' : $item->object,
+				'parent'    => 0,
+				'object_id' => intval( get_post_meta( $item->ID, '_menu_item_object_id', true ) ),
+				'children'  => $this->get_menu_children( $menu, $item->ID )
 			];
 		}
 
@@ -92,10 +92,11 @@ class Menu extends Abstract_Content {
 
 			switch ( $type ) {
 				case 'post_type':
-					$object_id     = get_post_meta( $post->ID, '_menu_item_object_id', true );
-					$object        = get_post( $object_id );
-					$item['title'] = $object->post_title;
-					$item['url']   = get_permalink( $object->ID );
+					$object_id         = get_post_meta( $post->ID, '_menu_item_object_id', true );
+					$object            = get_post( $object_id );
+					$item['title']     = $object->post_title;
+					$item['url']       = get_permalink( $object->ID );
+					$item['object_id'] = intval( $object_id );
 					break;
 				case 'custom':
 					$item['title'] = $post->post_title;
@@ -103,12 +104,16 @@ class Menu extends Abstract_Content {
 					break;
 			}
 
+			// Add common fields.
 			$item['id']       = $post->ID;
 			$item['target']   = get_post_meta( $post->ID, '_menu_item_target', true );
 			$item['classes']  = get_post_meta( $post->ID, '_menu_item_classes', true );
 			$item['parent']   = $parent_id;
 			$item['children'] = $this->get_menu_children( $menu, $post->ID );
 			$item['type']     = $type === 'post_type' ? 'post' : $type;
+
+			// Remove empty classes.
+			$item['classes'] = array_filter( (array) $item['classes'] );
 
 			$result[] = $item;
 		}

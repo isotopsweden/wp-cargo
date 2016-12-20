@@ -34,6 +34,6 @@ class Actions_Test extends \WP_UnitTestCase {
 			return ['body' => '{"success":true}'];
 		} );
 
-		$this->assertTrue( $fn( $post_id ) );
+		$this->assertTrue( $fn( $post_id, get_post( $post_id ) ) );
 	}
 }
