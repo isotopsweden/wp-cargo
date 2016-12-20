@@ -15,11 +15,17 @@ class HTTP extends Abstract_Pusher {
 		$options = $this->cargo->config( 'pusher.http', ['url' => ''] );
 		$options = is_array( $options ) ? $options : ['url' => ''];
 
+		$json = $this->to_json( $data );
+
+		if ( empty( $json ) ) {
+			return false;
+		}
+
 		$args = array_merge( [
 			'headers' => [
 				'Content-Type' => 'application/json; charset=utf-8'
 			],
-			'body'    => $this->to_json( $data ),
+			'body'    => $json,
 			'method'  => 'post',
 			'timeout' => 30
 		], $options );

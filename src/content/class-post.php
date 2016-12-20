@@ -10,7 +10,13 @@ class Post extends Abstract_Content {
 	 * @param mixed $post
 	 */
 	public function __construct( $post ) {
+		// Bail if a revision post.
 		if ( wp_is_post_revision( $post ) ) {
+			return;
+		}
+
+		// Bail if `nav_menu_item` post type.
+		if ( get_post_type( $post ) === 'nav_menu_item' ) {
 			return;
 		}
 

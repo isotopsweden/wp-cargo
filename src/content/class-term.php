@@ -10,8 +10,15 @@ class Term extends Abstract_Content {
 	 * @param int $id
 	 */
 	public function __construct( $id ) {
+		$term = get_term( $id, '' );
+
+		// Bail if `nav_menu` taxonomy.
+		if ( $term->taxonomy === 'nav_menu' ) {
+			return;
+		}
+
 		// Create term object.
-		$this->create( 'term', get_term( $id, '' ) );
+		$this->create( 'term', $term );
 
 		// Add meta data.
 		$this->add( 'meta', get_term_meta( $id ) );
