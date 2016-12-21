@@ -2,19 +2,21 @@
 
 namespace Isotop\Cargo\CLI;
 
+use WP_CLI\Formatter;
+
 class Command extends \WP_CLI_Command {
 
 	/**
 	 * Get formatter object based on supplied arguments.
 	 *
-	 * @param  array $assoc_args Associative args from CLI to determine formattin
+	 * @param  array $assoc_args
 	 *
 	 * @return \WP_CLI\Formatter
 	 */
 	protected function get_formatter( $assoc_args ) {
 		$args = $this->get_format_args( $assoc_args );
 
-		return new \WP_CLI\Formatter( $args );
+		return new Formatter( $args );
 	}
 
 	/**
@@ -31,9 +33,9 @@ class Command extends \WP_CLI_Command {
 	/**
 	 * Get format args that will be passed into CLI Formatter.
 	 *
-	 * @param  array $assoc_args Associative args from CLI
+	 * @param  array $assoc_args
 	 *
-	 * @return array Formatter args
+	 * @return array
 	 */
 	protected function get_format_args( $assoc_args ) {
 		$format_args = [

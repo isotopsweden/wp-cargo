@@ -19,7 +19,7 @@ class MySQL extends Abstract_Database {
 	public function all() {
 		global $wpdb;
 
-		$value = $wpdb->get_results( "SELECT id, data FROM `{$this->get_table()}`" );
+		$value = $wpdb->get_results( "SELECT id, data FROM `{$this->get_table()}`" ); // wpcs: unprepared SQL
 
 		if ( empty( $value ) ) {
 			return [];
@@ -36,7 +36,7 @@ class MySQL extends Abstract_Database {
 	public function clear() {
 		global $wpdb;
 
-		return $wpdb->query( "TRUNCATE TABLE `{$this->get_table()}`" );
+		return $wpdb->query( "TRUNCATE TABLE `{$this->get_table()}`" ); // wpcs: unprepared SQL
 	}
 
 	/**
@@ -100,7 +100,7 @@ class MySQL extends Abstract_Database {
 		if ( $installed_version !== $table_version ) {
 			global $wpdb;
 
-			$wpdb->query( "DROP TABLE IF EXISTS `{$this->get_table()}`" );
+			$wpdb->query( "DROP TABLE IF EXISTS `{$this->get_table()}`" ); // wpcs: unprepared SQL
 
 			$sql = sprintf(
 				'CREATE TABLE %1$s (

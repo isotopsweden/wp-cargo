@@ -15,7 +15,7 @@ class Cargo extends Container {
 	/**
 	 * The Cargo configuration.
 	 *
-	 * @var
+	 * @var array
 	 */
 	protected $config = [];
 
@@ -124,8 +124,6 @@ class Cargo extends Container {
 	 * Set config by file or array.
 	 *
 	 * @param  string|mixed $config
-	 *
-	 * @return mixed|void
 	 */
 	public function set_config( $config ) {
 		if ( is_string( $config ) && file_exists( $config ) ) {
@@ -143,7 +141,7 @@ class Cargo extends Container {
 	 * @param  string $id
 	 * @param  array  $parameters
 	 *
-	 * @throws \InvalidArgumentException If identifier is not bound.
+	 * @throws InvalidArgumentException If identifier is not bound.
 	 *
 	 * @return mixed
 	 */
@@ -165,7 +163,7 @@ class Cargo extends Container {
 	 *
 	 * @param  string $type
 	 *
-	 * @throws \Exception If driver for given type can't be found.
+	 * @throws Exception If driver for given type can't be found.
 	 *
 	 * @return mixed
 	 */

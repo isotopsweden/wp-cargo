@@ -12,6 +12,8 @@ function cargo() {
 /**
  * Determine if the given object is a JSON string or not.
  *
+ * @param  mixed $obj
+ *
  * @return false
  */
 function cargo_is_json( $obj ) {
