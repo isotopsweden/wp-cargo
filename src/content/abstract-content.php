@@ -46,6 +46,15 @@ abstract class Abstract_Content implements Content_Interface {
 	}
 
 	/**
+	 * Get content data.
+	 *
+	 * @return array
+	 */
+	public function get_data() {
+		return $this->data;
+	}
+
+	/**
 	 * Get JSON string for content data.
 	 *
 	 * @return mixed
