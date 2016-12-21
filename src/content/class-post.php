@@ -32,6 +32,9 @@ class Post extends Abstract_Content {
 			return;
 		}
 
+		// Apply the content filter before creating post object.
+		$post->post_content = apply_filters( 'the_content', $post->post_content );
+
 		// Create post object.
 		$this->create( 'post', $post );
 
