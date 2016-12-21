@@ -13,9 +13,12 @@ class Menu extends Abstract_Content {
 
 		foreach ( $menus as $menu ) {
 			$result[] = [
-				'id'   => $menu->term_id,
-				'name' => $menu->name,
-				'menu' => $this->get_menu( $menu )
+				'id'    => $menu->term_id,
+				'name'  => $menu->name,
+				'items' => $this->get_menu( $menu ),
+				'extra' => [
+					'site_id' => get_current_blog_id()
+				],
 			];
 		}
 
@@ -127,7 +130,6 @@ class Menu extends Abstract_Content {
 		$item['parent']   = $parent_id;
 		$item['children'] = $this->get_menu_children( $menu, $post->ID );
 		$item['type']     = $type === 'post_type' ? 'post' : $type;
-		$item['site_id']  = get_current_blog_id();
 
 		// Remove empty classes.
 		$item['classes'] = array_filter( (array) $item['classes'] );
