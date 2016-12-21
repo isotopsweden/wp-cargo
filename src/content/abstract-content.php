@@ -74,19 +74,65 @@ abstract class Abstract_Content implements Content_Interface {
 			return [];
 		}
 
-		foreach ( $meta as $index => $value ) {
-			if ( is_array( $value ) && count( $value ) === 1 ) {
-				$value = $value[0];
+		$result = [];
+
+		foreach ( $meta as $slug => $value1 ) {
+			if ( is_array( $value1 ) && count( $value1 ) === 1 ) {
+				$value1 = $value1[0];
 			}
 
-			$meta[$index] = apply_filters( 'cargo_prepare_meta_value', $object_id, $index, $value, $this->type );
+			/**
+			 * Modify meta value.
+			 *
+			 * @param  int    $object_id
+			 * @param  string $slug
+			 * @param  mixed  $value1
+			 * @param  string $type
+			 *
+			 * @return mixed
+			 */
+			$value2 = apply_filters( 'cargo_prepare_meta_value', $object_id, $slug, $value1, $this->type );
 
-			if ( is_null( $meta[$index] ) ) {
-				unset( $meta[$index] );
+			if ( is_null( $value2 ) ) {
+				continue;
 			}
+
+			if ( $value1 === $value2 || ! is_array( $value2 ) ) {
+				$value2 = [
+					'slug'  => $slug,
+					'title' => '',
+					'type'  => gettype( $value2 ),
+					'value' => $this->cast_string( $value2 )
+				];
+			}
+
+			$result[] = $value2;
 		}
 
-		return $meta;
+		return $result;
+	}
+
+	/**
+	 * Cast string value.
+	 *
+	 * @param  mixed $str
+	 *
+	 * @return mixed
+	 */
+	protected function cast_string( $str ) {
+		if ( ! is_string( $str ) ) {
+			return $str;
+		}
+
+		if ( is_numeric( $str ) ) {
+			return $str == (int) $str ? (int) $str : (float) $str;
+		}
+
+		if ( $str === 'true' || $str === 'false' ) {
+			return $str === 'true';
+		}
+
+		return maybe_unserialize( $str );
 	}
 
 	/**
