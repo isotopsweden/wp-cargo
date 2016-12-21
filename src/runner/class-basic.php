@@ -2,6 +2,7 @@
 
 namespace Isotop\Cargo\Runner;
 
+use Isotop\Cargo\Content\Menu;
 use Isotop\Cargo\Content\Post;
 use Isotop\Cargo\Content\Term;
 
@@ -13,15 +14,21 @@ class Basic extends Abstract_Runner {
 	public function run_all() {
 		$pusher = $this->cargo->make( 'pusher' );
 
+		// Push all posts.
 		foreach ( $this->posts() as $post ) {
 			$pusher->send( new Post( $post ) );
 			$this->log_info( sprintf( 'Pushed post with id %d to pusher', $post->ID ) );
 		}
 
+		// Push all terms.
 		foreach ( $this->terms() as $term ) {
 			$pusher->send( new Term( $term ) );
 			$this->log_info( sprintf( 'Pushed term with id %d to pusher', $term->ID ) );
 		}
+
+		// Push all menus.
+		$pusher->send( new Menu() );
+		$this->log_info( 'Pushed all menus' );
 
 		$this->log_success( 'Done!' );
 	}
