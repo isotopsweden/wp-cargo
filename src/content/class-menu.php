@@ -110,6 +110,14 @@ class Menu extends Abstract_Content {
 				$item['url']           = get_post_meta( $post->ID, '_menu_item_url', true );
 				$item['object_status'] = 'publish';
 				break;
+			case 'taxonomy':
+				$object_id             = get_post_meta( $post->ID, '_menu_item_object_id', true );
+				$object                = get_term( $object_id );
+				$item['title']         = $object->name;
+				$itme['url']           = '';
+				$item['object_id']     = intval( $object_id );
+				$item['object_status'] = 'publish';
+				break;
 		}
 
 		// Add common fields.
