@@ -31,7 +31,7 @@ class Term extends Abstract_Content {
 		$this->create( 'term', $term );
 
 		// Add meta data.
-		$this->add( 'meta', get_term_meta( $id ) );
+		$this->add( 'meta', $this->prepare_meta( $term->term_id, get_term_meta( $id ) ) );
 
 		// Add extra data.
 		$this->add( 'extra', [

@@ -62,6 +62,34 @@ abstract class Abstract_Content implements Content_Interface {
 	}
 
 	/**
+	 * Prepare meta value.
+	 *
+	 * @param  int   $object_id
+	 * @param  array $meta
+	 *
+	 * @return mixed
+	 */
+	protected function prepare_meta( $object_id, $meta ) {
+		if ( ! is_array( $meta ) ) {
+			return [];
+		}
+
+		foreach ( $meta as $index => $value ) {
+			if ( is_array( $value ) && count( $value ) === 1 ) {
+				$value = $value[0];
+			}
+
+			$meta[$index] = apply_filters( 'cargo_prepare_meta_value', $object_id, $index, $value, $this->type );
+
+			if ( is_null( $meta[$index] ) ) {
+				unset( $meta[$index] );
+			}
+		}
+
+		return $meta;
+	}
+
+	/**
 	 * Is the content data valid?
 	 *
 	 * @return bool

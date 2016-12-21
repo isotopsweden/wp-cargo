@@ -25,11 +25,18 @@ class Post extends Abstract_Content {
 			return;
 		}
 
+		$post = get_post( $post );
+
+		// Bail if empty.
+		if ( empty( $post ) ) {
+			return;
+		}
+
 		// Create post object.
-		$this->create( 'post', get_post( $post ) );
+		$this->create( 'post', $post );
 
 		// Add meta data.
-		$this->add( 'meta', get_post_meta( $post ) );
+		$this->add( 'meta', $this->prepare_meta( $post->ID, get_post_meta( $post->ID ) ) );
 
 		// Add extra data.
 		$this->add( 'extra', [
