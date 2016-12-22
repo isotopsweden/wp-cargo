@@ -32,4 +32,4 @@ function push_menu() {
 	return $res;
 }
 
-cargo()->action( 'admin_init', __NAMESPACE__ . '\\push_menu' );
+cargo()->action( 'admin_footer', __NAMESPACE__ . '\\push_menu' );

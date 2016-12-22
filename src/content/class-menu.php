@@ -103,7 +103,7 @@ class Menu extends Abstract_Content {
 			case 'post_type':
 				$object_id             = get_post_meta( $post->ID, '_menu_item_object_id', true );
 				$object                = get_post( $object_id );
-				$item['title']         = $object->post_title;
+				$item['title']         = empty( $post->post_title ) ? $object->post_title : $post->post_title;
 				$item['url']           = get_permalink( $object->ID );
 				$item['object_id']     = intval( $object_id );
 				$item['object_status'] = $object->post_status;
@@ -116,7 +116,7 @@ class Menu extends Abstract_Content {
 			case 'taxonomy':
 				$object_id             = get_post_meta( $post->ID, '_menu_item_object_id', true );
 				$object                = get_term( $object_id );
-				$item['title']         = $object->name;
+				$item['title']         = empty( $post->post_title ) ? $object->name : $post->post_title;
 				$itme['url']           = '';
 				$item['object_id']     = intval( $object_id );
 				$item['object_status'] = 'publish';
