@@ -9,12 +9,12 @@ interface Content_Interface {
 	 *
 	 * @return mixed
 	 */
-	public function get_data();
+	public function data();
 
 	/**
-	 * Get JSON string for content data.
+	 * Convert content data to JSON.
 	 *
 	 * @return mixed
 	 */
-	public function get_json();
+	public function to_json();
 }

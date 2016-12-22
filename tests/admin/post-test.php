@@ -6,18 +6,18 @@ use Closure;
 use Isotop\Cargo\Cargo;
 use Isotop\Cargo\Database\MySQL;
 use Isotop\Cargo\Pusher\HTTP;
-use function Isotop\Cargo\Admin\save_post_or_taxonomy;
+use function Isotop\Cargo\Admin\push_post_or_taxonomy;
 
-class Actions_Test extends \WP_UnitTestCase {
+class Post_Test extends \WP_UnitTestCase {
 
-	public function test_save_post_or_taxonomy() {
-		$this->assertFalse( save_post_or_taxonomy( null ) );
+	public function test_push_post_or_taxonomy() {
+		$this->assertFalse( push_post_or_taxonomy( null ) );
 
 		$post_id = $this->factory->post->create();
-		$this->assertFalse( save_post_or_taxonomy( $post_id ) );
+		$this->assertFalse( push_post_or_taxonomy( $post_id ) );
 
 		$cargo = Cargo::instance();
-		$fn    = Closure::fromCallable( '\\Isotop\\Cargo\\Admin\\save_post_or_taxonomy' )->bindTo( $cargo );
+		$fn    = Closure::fromCallable( '\\Isotop\\Cargo\\Admin\\push_post_or_taxonomy' )->bindTo( $cargo );
 
 		$_POST = ['hello' => 'world'];
 

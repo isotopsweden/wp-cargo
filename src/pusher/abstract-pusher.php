@@ -33,7 +33,7 @@ abstract class Abstract_Pusher implements Pusher_Interface {
 	 */
 	protected function to_json( $data ) {
 		if ( $data instanceof Content_Interface ) {
-			return $data->get_json() ?: '';
+			return $data->to_json() ?: '';
 		}
 
 		$data = is_string( $data ) ? $data : wp_json_encode( $data );

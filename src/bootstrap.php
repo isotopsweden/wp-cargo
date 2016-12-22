@@ -1,7 +1,13 @@
 <?php
 
-// Require WordPress files.
-require_once __DIR__ . '/admin/actions.php';
+// Require files that shouldn't be autoloaded by Composer.
+array_map( function ( $file ) {
+	require_once __DIR__ . '/admin/' . $file;
+}, [
+	'menu.php',
+	'post.php',
+	'user.php'
+] );
 
 // Bootstrap Cargo.
 cargo()->set_driver( 'database.mysql', '\\Isotop\\Cargo\\Database\\MySQL' );

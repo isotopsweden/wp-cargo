@@ -21,17 +21,6 @@ abstract class Abstract_Content implements Content_Interface {
 	protected $data;
 
 	/**
-	 * Create content data.
-	 *
-	 * @param string $type
-	 * @param mixed  $data
-	 */
-	public function create( string $type, $data ) {
-		$this->type = $type;
-		$this->data = (array) $data;
-	}
-
-	/**
 	 * Add value to content data.
 	 *
 	 * @param string $key
@@ -46,28 +35,46 @@ abstract class Abstract_Content implements Content_Interface {
 	}
 
 	/**
+	 * Cast string value.
+	 *
+	 * @param  mixed $str
+	 *
+	 * @return mixed
+	 */
+	protected function cast_string( $str ) {
+		if ( ! is_string( $str ) ) {
+			return $str;
+		}
+
+		if ( is_numeric( $str ) ) {
+			return $str == (int) $str ? (int) $str : (float) $str;
+		}
+
+		if ( $str === 'true' || $str === 'false' ) {
+			return $str === 'true';
+		}
+
+		return maybe_unserialize( $str );
+	}
+
+	/**
+	 * Create content data.
+	 *
+	 * @param string $type
+	 * @param mixed  $data
+	 */
+	public function create( string $type, $data ) {
+		$this->type = $type;
+		$this->data = (array) $data;
+	}
+
+	/**
 	 * Get content data.
 	 *
 	 * @return array
 	 */
-	public function get_data() {
+	public function data() {
 		return $this->data;
-	}
-
-	/**
-	 * Get JSON string for content data.
-	 *
-	 * @return mixed
-	 */
-	public function get_json() {
-		if ( ! $this->valid_data() ) {
-			return false;
-		}
-
-		return wp_json_encode( [
-			'type' => $this->type,
-			'data' => $this->data
-		] );
 	}
 
 	/**
@@ -122,26 +129,19 @@ abstract class Abstract_Content implements Content_Interface {
 	}
 
 	/**
-	 * Cast string value.
-	 *
-	 * @param  mixed $str
+	 * Get JSON string for content data.
 	 *
 	 * @return mixed
 	 */
-	protected function cast_string( $str ) {
-		if ( ! is_string( $str ) ) {
-			return $str;
+	public function to_json() {
+		if ( ! $this->valid_data() ) {
+			return false;
 		}
 
-		if ( is_numeric( $str ) ) {
-			return $str == (int) $str ? (int) $str : (float) $str;
-		}
-
-		if ( $str === 'true' || $str === 'false' ) {
-			return $str === 'true';
-		}
-
-		return maybe_unserialize( $str );
+		return wp_json_encode( [
+			'type' => $this->type,
+			'data' => $this->data
+		] );
 	}
 
 	/**
