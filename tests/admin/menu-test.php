@@ -4,7 +4,6 @@ namespace Isotop\Tests\Cargo\Admin;
 
 use Closure;
 use Isotop\Cargo\Cargo;
-use Isotop\Cargo\Content\Menu;
 
 class Menu_Test extends \WP_UnitTestCase {
 
@@ -26,7 +25,7 @@ class Menu_Test extends \WP_UnitTestCase {
 		add_filter( 'pre_http_request', function () {
 			return ['body' => '{"success":true}'];
 		} );
+
 		$this->assertTrue( $fn() );
 	}
-
 }
