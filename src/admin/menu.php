@@ -2,14 +2,14 @@
 
 namespace Isotop\Cargo\Admin;
 
-use Isotop\Cargo\Content\Menu;
+use Isotop\Cargo\Content\Menus;
 
 /**
- * Push menu to external service.
+ * Push menus to external service.
  *
  * @return bool
  */
-function push_menu() {
+function push_menus() {
 	if ( empty( $_POST ) ) {
 		return false;
 	}
@@ -18,10 +18,10 @@ function push_menu() {
 		return false;
 	}
 
-	// Create menu content object.
-	$data = new Menu();
+	// Create menus content object.
+	$data = new Menus();
 
-	// Send menu to pusher.
+	// Send menus to pusher.
 	$res = $this->make( 'pusher' )->send( $data );
 
 	// Handle error.
@@ -32,4 +32,4 @@ function push_menu() {
 	return $res;
 }
 
-cargo()->action( 'admin_footer', __NAMESPACE__ . '\\push_menu' );
+cargo()->action( 'admin_footer', __NAMESPACE__ . '\\push_menus' );

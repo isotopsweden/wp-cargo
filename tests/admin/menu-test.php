@@ -7,9 +7,9 @@ use Isotop\Cargo\Cargo;
 
 class Menu_Test extends \WP_UnitTestCase {
 
-	public function test_push_menu() {
+	public function test_push_menus() {
 		$cargo = Cargo::instance();
-		$fn    = Closure::fromCallable( '\\Isotop\\Cargo\\Admin\\push_menu' )->bindTo( $cargo );
+		$fn    = Closure::fromCallable( '\\Isotop\\Cargo\\Admin\\push_menus' )->bindTo( $cargo );
 
 		$this->assertFalse( $fn() );
 

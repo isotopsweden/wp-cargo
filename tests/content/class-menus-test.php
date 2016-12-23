@@ -2,27 +2,27 @@
 
 namespace Isotop\Tests\Cargo\Content;
 
-use Isotop\Cargo\Content\Menu;
+use Isotop\Cargo\Content\Menus;
 
-class Menu_Test extends \WP_UnitTestCase {
+class Menus_Test extends \WP_UnitTestCase {
 
 	public function test_empty_menu() {
-		$menu = new Menu();
+		$menus = new Menus();
 
-		$this->assertFalse( $menu->to_json() );
+		$this->assertFalse( $menus->to_json() );
 	}
 
 	public function test_real_menu() {
 		$this->factory->term->create( ['taxonomy' => 'nav_menu'] );
 
-		$menu = new Menu();
+		$menus = new Menus();
 
-		$this->assertTrue( cargo_is_json( $menu->to_json() ) );
+		$this->assertTrue( cargo_is_json( $menus->to_json() ) );
 	}
 
 	public function test_empty_get_data() {
-		$menu = new Menu();
-		$data = $menu->data();
+		$menus = new Menus();
+		$data = $menus->data();
 
 		$this->assertEmpty( $data );
 	}
@@ -30,8 +30,8 @@ class Menu_Test extends \WP_UnitTestCase {
 	public function test_real_get_data() {
 		$this->factory->term->create( ['taxonomy' => 'nav_menu'] );
 
-		$menu = new Menu();
-		$data = $menu->data();
+		$menus = new Menus();
+		$data = $menus->data();
 
 		$this->assertSame( get_current_blog_id(), $data[0]['extra']['site_id'] );
 	}

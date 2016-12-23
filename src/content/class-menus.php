@@ -2,10 +2,10 @@
 
 namespace Isotop\Cargo\Content;
 
-class Menu extends Abstract_Content {
+class Menus extends Abstract_Content {
 
 	/**
-	 * Menu constructor.
+	 * Menus constructor.
 	 */
 	public function __construct() {
 		$menus  = wp_get_nav_menus();
@@ -22,8 +22,8 @@ class Menu extends Abstract_Content {
 			];
 		}
 
-		// Create menu object.
-		$this->create( 'menu', $result );
+		// Create menus object.
+		$this->create( 'menus', $result );
 	}
 
 	/**
