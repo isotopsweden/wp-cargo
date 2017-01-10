@@ -5,6 +5,7 @@ array_map( function ( $file ) {
 	require_once __DIR__ . '/admin/' . $file;
 }, [
 	'menu.php',
+	'options.php',
 	'post.php',
 	'user.php'
 ] );
