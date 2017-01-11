@@ -32,14 +32,6 @@ cargo()->set_config( [
 ] );
 ```
 
-Configure what options that should be pushed:
-
-```php
-add_filter( 'cargo_options', function () {
-  return ['siteurl', 'home'];
-} );
-```
-
 Prepare meta fields, so you can hook into a custom fields plugin or something else:
 
 ```php
