@@ -15,9 +15,6 @@ composer require isotopsweden/wp-cargo
 Example configuration:
 
 ```php
-/**
- * Set Cargo config.
- */
 cargo()->set_config( [
 	'database' => [
 		'driver' => 'mysql',
