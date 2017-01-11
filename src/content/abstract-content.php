@@ -138,9 +138,19 @@ abstract class Abstract_Content implements Content_Interface {
 			return false;
 		}
 
+		/**
+		 * Modify content data before it's encoded to JSON.
+		 *
+		 * @param  array $data
+		 * @param  array $type
+		 *
+		 * @return array
+		 */
+		$data = apply_filters( 'cargo_modify_content_data', $this->data, $this->type );
+
 		return wp_json_encode( [
 			'type' => $this->type,
-			'data' => $this->data
+			'data' => $data
 		] );
 	}
 

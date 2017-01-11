@@ -20,6 +20,17 @@ class Post_Test extends \WP_UnitTestCase {
 		$this->assertTrue( cargo_is_json( $post->to_json() ) );
 	}
 
+	public function test_real_post_modify() {
+		$post_id = $this->factory->post->create();
+		$post    = new Post( $post_id );
+
+		add_filter( 'cargo_modify_content_data', function ( $data ) {
+			return [];
+		} );
+
+		$this->assertSame( '{"type":"post","data":[]}', $post->to_json() );
+	}
+
 	public function test_empty_get_data() {
 		$post_id = 0;
 		$post    = new Post( $post_id );
