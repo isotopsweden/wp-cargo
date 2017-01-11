@@ -8,7 +8,8 @@ class Options extends Abstract_Content {
 	 * Options constructor.
 	 */
 	public function __construct() {
-		$slugs  = apply_filters( 'cargo_options', [] );
+		$slugs  = cargo()->config( 'options', [] );
+		$slugs  = is_array( $slugs ) ? $slugs : [];
 		$result = [];
 
 		foreach ( $slugs as $slug ) {

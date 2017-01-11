@@ -16,6 +16,7 @@ Example configuration:
 
 ```php
 cargo()->set_config( [
+	'options'  => ['siteurl', 'home'],
 	'database' => [
 		'driver' => 'mysql',
 		'mysql'  => [
