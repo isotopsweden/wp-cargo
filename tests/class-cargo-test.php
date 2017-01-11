@@ -54,7 +54,6 @@ class Cargo_Test extends \PHPUnit_Framework_TestCase {
 
 		$cargo->set_driver( 'database.mysql', '\\Isotop\\Cargo\\Database\\MySQL' );
 
-
 		$this->assertTrue( is_object( $cargo->make( 'database' ) ) );
 	}
 
