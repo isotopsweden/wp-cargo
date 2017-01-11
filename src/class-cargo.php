@@ -181,12 +181,15 @@ class Cargo extends Container {
 	/**
 	 * Set driver.
 	 *
-	 * @param string $key
-	 * @param string $driver
+	 * @param  string $key
+	 * @param  string $driver
+	 *
+	 * @throws Exception If the driver class cannot be found.
+	 * @throws Exception If the driver does not implement the driver interface.
 	 */
 	public function set_driver( string $key, string $driver ) {
 		if ( ! class_exists( $driver ) ) {
-			return;
+			throw new Exception( sprintf( 'Driver class for %s cannot be found', $key ) );
 		}
 
 		$key = sprintf( 'driver.%s', $key );
@@ -194,7 +197,7 @@ class Cargo extends Container {
 		$obj = $rc->newInstanceArgs( [$this] );
 
 		if ( $obj instanceof Driver_Interface === false ) {
-			return;
+			throw new Exception( sprintf( '%s driver does not implement driver interface', $key ) );
 		}
 
 		$this->bind( $key, $obj );
