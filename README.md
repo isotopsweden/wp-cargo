@@ -36,7 +36,7 @@ cargo()->set_config( [
 
 Configure what options that should be pushed:
 
-```
+```php
 add_filter( 'cargo_options', function () {
   return ['siteurl', 'home'];
 } );
@@ -44,7 +44,7 @@ add_filter( 'cargo_options', function () {
 
 Prepare meta fields, so you can hook into a custom fields plugin or something else:
 
-```
+```php
 add_filter( 'cargo_prepare_meta_value', function( $object_id, $slug, $value, $type ) {
   return $value;
 }, 10, 4 );
@@ -52,7 +52,7 @@ add_filter( 'cargo_prepare_meta_value', function( $object_id, $slug, $value, $ty
 
 Modify content data before push:
 
-```
+```php
 add_filter( 'cargo_modify_content_data', function ( $data, $type ) {
   return $data;
 }, 10, 2 );
