@@ -35,7 +35,7 @@ cargo()->set_config( [
 Prepare meta fields, so you can hook into a custom fields plugin or something else:
 
 ```php
-add_filter( 'cargo_prepare_meta_value', function( $object_id, $slug, $value, $type ) {
+add_filter( 'cargo_prepare_meta_value', function ( $object_id, $slug, $value, $type ) {
   return $value;
 }, 10, 4 );
 ```
