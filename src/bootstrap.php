@@ -18,7 +18,7 @@ cargo()->set_driver( 'runner.basic', '\\Isotop\\Cargo\\Runner\\Basic' );
 // Bootstrap Cargo CLI.
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	WP_CLI::add_command( 'cargo', '\\Isotop\\Cargo\\CLI\\CLI' );
-	WP_CLI::add_command( 'cargo runner', '\\Isotop\\Cargo\\CLI\\Commands\\Runner' );
+	WP_CLI::add_command( 'cargo run', '\\Isotop\\Cargo\\CLI\\Commands\\Run' );
 }
 
 // Set default configuration.

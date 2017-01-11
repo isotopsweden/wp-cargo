@@ -4,7 +4,7 @@ namespace Isotop\Cargo\CLI\Commands;
 
 use Isotop\Cargo\CLI\Command;
 
-class Runner extends Command {
+class Run extends Command {
 
 	/**
 	 * Run Cargo Runner.
@@ -18,7 +18,7 @@ class Runner extends Command {
 	 * @param array $args
 	 * @param array $assoc_args
 	 */
-	public function run( $args, $assoc_args ) {
+	public function __invoke( $args, $assoc_args ) {
 		$driver = $assoc_args['driver'] ?? 'basic';
 
 		if ( isset( $assoc_args['all'] ) ) {

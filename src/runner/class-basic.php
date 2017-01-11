@@ -2,7 +2,7 @@
 
 namespace Isotop\Cargo\Runner;
 
-use Isotop\Cargo\Content\Menu;
+use Isotop\Cargo\Content\Menus;
 use Isotop\Cargo\Content\Options;
 use Isotop\Cargo\Content\Post;
 use Isotop\Cargo\Content\Term;
@@ -28,7 +28,7 @@ class Basic extends Abstract_Runner {
 		}
 
 		// Push all menus.
-		$pusher->send( new Menu() );
+		$pusher->send( new Menus() );
 		$this->log_info( 'Pushed all menus' );
 
 		// Push all options.
