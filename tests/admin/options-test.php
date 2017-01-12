@@ -22,7 +22,7 @@ class Options_Test extends \WP_UnitTestCase {
 
 		$this->assertFalse( $fn() );
 
-		cargo()->set_config( ['options' => ['siteurl', 'home']] );
+		cargo()->set_config( ['content' => ['options' => ['siteurl', 'home']]] );
 
 		$this->assertTrue( $fn() );
 	}
