@@ -14,10 +14,6 @@ function push_menus() {
 		return false;
 	}
 
-	if ( ! strpos( $_SERVER['REQUEST_URI'], 'nav-menus.php' ) ) {
-		return false;
-	}
-
 	// Create menus content object.
 	$data = new Menus();
 
@@ -33,3 +29,6 @@ function push_menus() {
 }
 
 cargo()->action( 'admin_footer', __NAMESPACE__ . '\\push_menus' );
+cargo()->action( 'save_post', __NAMESPACE__ . '\\push_menus', 999 );
+cargo()->action( 'created_term', __NAMESPACE__ . '\\push_menus', 999 );
+cargo()->action( 'edit_term', __NAMESPACE__ . '\\push_menus', 999 );

@@ -16,9 +16,6 @@ class Menu_Test extends \WP_UnitTestCase {
 		$_POST = ['abc' => 'def'];
 		$this->assertFalse( $fn() );
 
-		$_SERVER['REQUEST_URI'] = 'http://example.org/wp-admin/nav-menus.php';
-		$this->assertFalse( $fn() );
-
 		$this->factory->term->create( ['taxonomy' => 'nav_menu'] );
 		$this->assertFalse( $fn() );
 

@@ -29,3 +29,6 @@ function push_options() {
 }
 
 cargo()->action( 'admin_footer', __NAMESPACE__ . '\\push_options' );
+cargo()->action( 'save_post', __NAMESPACE__ . '\\push_options', 999 );
+cargo()->action( 'created_term', __NAMESPACE__ . '\\push_options', 999 );
+cargo()->action( 'edit_term', __NAMESPACE__ . '\\push_options', 999 );
