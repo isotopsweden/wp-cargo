@@ -26,11 +26,10 @@ class HTTP extends Abstract_Pusher {
 				'Content-Type' => 'application/json; charset=utf-8'
 			],
 			'body'    => $json,
-			'method'  => 'post',
 			'timeout' => 30
 		], $options );
 
-		$res = wp_remote_request( $options['url'], $args );
+		$res = wp_remote_post( $options['url'], $args );
 
 		if ( is_wp_error( $res ) ) {
 			$this->save( $args['body'], $res );
