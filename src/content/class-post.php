@@ -55,10 +55,10 @@ class Post extends Abstract_Content {
 	 */
 	protected function get_terms( $post ) {
 		$result     = [];
-		$taxonomies = get_object_taxonomies( $post, 'objects' );
+		$taxonomies = get_object_taxonomies( $post );
 
-		foreach ( $taxonomies as $slug => $taxonomy ) {
-			$terms = wp_get_post_terms( $post->ID, $slug, ['fields' => 'ids'] );
+		foreach ( $taxonomies as $taxonomy ) {
+			$terms = wp_get_post_terms( $post->ID, $taxonomy, ['fields' => 'ids'] );
 
 			if ( is_wp_error( $terms ) ) {
 				continue;
@@ -67,7 +67,7 @@ class Post extends Abstract_Content {
 			foreach ( $terms as $term_id ) {
 				$result[] = [
 					'id'       => $term_id,
-					'taxonomy' => $slug
+					'taxonomy' => $taxonomy
 				];
 			}
 		}
