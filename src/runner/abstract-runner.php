@@ -104,7 +104,6 @@ abstract class Abstract_Runner implements Runner_Interface {
 	 */
 	protected function terms() {
 		return (array) ( new WP_Term_Query( [
-			'taxonomy'               => 'any',
 			'hide_empty'             => false,
 			'update_term_meta_cache' => false
 		] ) )->terms;
