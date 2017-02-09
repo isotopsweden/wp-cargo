@@ -22,7 +22,7 @@ class Command extends \WP_CLI_Command {
 	/**
 	 * Get default fields for formatter.
 	 *
-	 * Class that extends Papi_CLI_Command should override this method.
+	 * Class that extends this class should override this method.
 	 *
 	 * @return null|string|array
 	 */
