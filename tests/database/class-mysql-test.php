@@ -12,10 +12,16 @@ class MySQL_Test extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( is_array( $db->all() ) );
 
 		$db->save( json_encode( ['hello' => 'world'] ) );
+		$found = false;
 		foreach ( $db->all() as $item ) {
 			if ( json_encode( ['hello' => 'world'] ) === $item->data ) {
+				$found = true;
 				$this->assertTrue( true );
 			}
+		}
+
+		if ( ! $found ) {
+			$this->assertTrue( $found );
 		}
 
 		$db->clear();
