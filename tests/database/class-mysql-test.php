@@ -9,10 +9,14 @@ class MySQL_Test extends \PHPUnit_Framework_TestCase {
 
 	public function test_all() {
 		$db = new MySQL( Cargo::instance() );
-		$this->assertEmpty( $db->all() );
+		$this->assertTrue( is_array( $db->all() ) );
 
 		$db->save( json_encode( ['hello' => 'world'] ) );
-		$this->assertEquals( json_encode( ['hello' => 'world'] ), $db->all()[0]->data );
+		foreach ( $db->all() as $item ) {
+			if ( json_encode( ['hello' => 'world'] ) === $item->data ) {
+				$this->assertTrue( true );
+			}
+		}
 
 		$db->clear();
 	}

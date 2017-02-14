@@ -7,18 +7,25 @@ use Isotop\Cargo\Contracts\Content_Interface;
 abstract class Abstract_Content implements Content_Interface {
 
 	/**
-	 * Content type.
-	 *
-	 * @var string
-	 */
-	protected $type;
-
-	/**
 	 * Content data.
 	 *
 	 * @var array
 	 */
 	protected $data;
+
+	/**
+	 * Set action.
+	 *
+	 * @var string
+	 */
+	protected $action = 'update';
+
+	/**
+	 * Content type.
+	 *
+	 * @var string
+	 */
+	protected $type;
 
 	/**
 	 * Add value to content data.
@@ -135,6 +142,15 @@ abstract class Abstract_Content implements Content_Interface {
 	}
 
 	/**
+	 * Set content action.
+	 *
+	 * @param  string $action
+	 */
+	public function set_action( string $action ) {
+		$this->action = $action;
+	}
+
+	/**
 	 * Get JSON string for content data.
 	 *
 	 * @return mixed
@@ -155,8 +171,9 @@ abstract class Abstract_Content implements Content_Interface {
 		$data = apply_filters( 'cargo_modify_content_data', $this->data, $this->type );
 
 		return wp_json_encode( [
-			'type' => $this->type,
-			'data' => $data
+			'action' => $this->action,
+			'type'   => $this->type,
+			'data'   => $data
 		] );
 	}
 

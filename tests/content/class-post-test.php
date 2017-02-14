@@ -28,7 +28,20 @@ class Post_Test extends \WP_UnitTestCase {
 			return [];
 		} );
 
-		$this->assertSame( '{"type":"post","data":[]}', $post->to_json() );
+		$this->assertSame( '{"action":"update","type":"post","data":[]}', $post->to_json() );
+	}
+
+	public function test_action() {
+		$post_id = $this->factory->post->create();
+		$post    = new Post( $post_id );
+
+		add_filter( 'cargo_modify_content_data', function ( $data ) {
+			return [];
+		} );
+
+		$post->set_action( 'delete' );
+
+		$this->assertSame( '{"action":"delete","type":"post","data":[]}', $post->to_json() );
 	}
 
 	public function test_empty_get_data() {
