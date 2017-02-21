@@ -68,11 +68,24 @@ function modify_preview_link( $link, $post ) {
 
 	$args = [
 		'preview' => true,
-		'post_id' => $post->ID,
-		'token'   => cargo_user_token(),
+		'token'   => cargo_user_token()
 	];
 
-	return add_query_arg( $args, home_url( '/' ) );
+	// Fetch preview fields.
+	$fields = $this->config( 'preview.fields', ['post_id' => 'ID'] );
+
+	foreach ( $fields as $key => $value ) {
+		if ( is_numeric( $key ) ) {
+			$key = $value;
+		}
+
+		if ( isset( $post->$value ) ) {
+			$args[$key] = $post->$value;
+		}
+	}
+
+	// Create preview link.
+	return add_query_arg( $args, home_url( $this->config( 'content.preview.url', '/' ) ) );
 }
 
 // Handle preview link.

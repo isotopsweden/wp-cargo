@@ -16,8 +16,8 @@ Example configuration:
 
 ```php
 cargo()->set_config( [
-	'content' => [
-		'options'  => ['siteurl', 'home']
+  'content' => [
+    'options' => ['siteurl', 'home']
 	],
 	'database' => [
 		'driver' => 'mysql',
@@ -25,7 +25,11 @@ cargo()->set_config( [
 			'table' => 'wp_cargo'
 		]
 	],
-	'pusher'   => [
+	'preview' => [
+    'fields' => ['post_id' => 'ID', 'post_type'],
+    'url'    => '/_preview'
+  ],
+  'pusher'   => [
 		'driver' => 'http',
 		'http'   => [
 			'url' => 'http://localhost:9988'

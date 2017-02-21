@@ -6,6 +6,7 @@ use Closure;
 use Isotop\Cargo\Cargo;
 use Isotop\Cargo\Database\MySQL;
 use Isotop\Cargo\Pusher\HTTP;
+use function Isotop\Cargo\Admin\modify_preview_link;
 use function Isotop\Cargo\Admin\push_post_or_term;
 use function Isotop\Cargo\Admin\push_delete_post_or_term;
 
@@ -36,6 +37,34 @@ class Post_Test extends \WP_UnitTestCase {
 		} );
 
 		$this->assertTrue( $fn( $post_id, get_post( $post_id ) ) );
+	}
+
+	public function test_modify_preview_link() {
+		$this->assertEmpty( modify_preview_link( '', null ) );
+
+		$cargo = Cargo::instance();
+		$fn    = Closure::fromCallable( '\\Isotop\\Cargo\\Admin\\modify_preview_link' )->bindTo( $cargo );
+
+		$this->assertEmpty( $fn( '', null ) );
+
+		$post_id = $this->factory->post->create();
+		$_POST = ['test' => true];
+
+		$out = $fn( '', get_post( $post_id ) );
+		$this->assertTrue( strpos( $out, 'preview=1' ) !== false );
+		$this->assertTrue( strpos( $out, 'post_id=' . $post_id ) !== false );
+
+		$cargo->set_config( [
+			'preview' => [
+				'url'    => '/_preview',
+				'fields' => ['post_id' => 'ID', 'post_type']
+			]
+		] );
+
+		$out = $fn( '', get_post( $post_id ) );
+		$this->assertTrue( strpos( $out, 'preview=1' ) !== false );
+		$this->assertTrue( strpos( $out, 'post_type=post' ) !== false );
+		$this->assertTrue( strpos( $out, 'post_id=' . $post_id ) !== false );
 	}
 
 	public function test_push_delete_post_or_term() {
