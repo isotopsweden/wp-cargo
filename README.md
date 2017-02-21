@@ -18,23 +18,23 @@ Example configuration:
 cargo()->set_config( [
   'content' => [
     'options' => ['siteurl', 'home']
-    ],
-    'database' => [
-        'driver' => 'mysql',
-        'mysql'  => [
-            'table' => 'wp_cargo'
-        ]
-    ],
-    'preview' => [
-      'fields' => ['post_id' => 'ID', 'post_type'],
-      'url'    => '/_preview'
-    ],
-    'pusher'   => [
-        'driver' => 'http',
-        'http'   => [
-            'url' => 'http://localhost:9988'
-        ]
+  ],
+  'database' => [
+    'driver' => 'mysql',
+    'mysql'  => [
+      'table' => 'wp_cargo'
     ]
+  ],
+  'preview' => [
+    'fields' => ['post_id' => 'ID', 'post_type'],
+    'url'    => '/_preview'
+  ],
+  'pusher'   => [
+    'driver' => 'http',
+    'http'   => [
+      'url' => 'http://localhost:9988'
+    ]
+  ]
 ] );
 ```
 
