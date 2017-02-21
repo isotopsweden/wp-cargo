@@ -27,7 +27,7 @@ cargo()->set_config( [
   ],
   'preview' => [
     'fields' => ['post_id' => 'ID', 'post_type'],
-    'url'    => '/_preview'
+    'url'    => 'http://example.com/_preview'
   ],
   'pusher'   => [
     'driver' => 'http',
