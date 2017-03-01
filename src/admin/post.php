@@ -93,6 +93,52 @@ cargo()->action( 'preview_page_link', __NAMESPACE__ . '\\modify_preview_link', 9
 cargo()->action( 'preview_post_link', __NAMESPACE__ . '\\modify_preview_link', 999, 2 );
 
 /**
+ * Push post to external service as when trash status is set or removed.
+ *
+ * @param  string  $new_status
+ * @param  string  $old_status
+ * @param  WP_Post $post
+ *
+ * @return bool
+ */
+function push_trash_post( $new_status, $old_status, $post ) {
+	// Check if there was a multisite switch before.
+	if ( is_multisite() && ms_is_switched() ) {
+		return false;
+	}
+
+	// Bail if id is empty.
+	if ( empty( $post ) ) {
+		return false;
+	}
+
+	// Bail if new status or old status isn't trash.
+	if ( $new_status !== 'trash' && $old_status !== 'trash' ) {
+		return;
+	}
+
+	$data = new Post( $post );
+
+	// If new status is trash we should add delete action to post data.
+	if ( $new_status === 'trash' ) {
+		$data->set_action( 'delete' );
+	}
+
+	// Send post data to pusher.
+	$res = $this->make( 'pusher' )->send( $data );
+
+	// Handle error.
+	if ( is_wp_error( $res ) ) {
+		return false;
+	}
+
+	return $res;
+}
+
+// Handle post status.
+cargo()->action( 'transition_post_status', __NAMESPACE__ . '\\push_trash_post', 999, 3 );
+
+/**
  * Push post or term with a delete notice to external service.
  *
  * @param  int    $id

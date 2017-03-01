@@ -67,6 +67,29 @@ class Post_Test extends \WP_UnitTestCase {
 		$this->assertTrue( strpos( $out, 'post_id=' . $post_id ) !== false );
 	}
 
+	public function test_push_trash_post() {
+		$this->assertFalse( push_delete_post_or_term( null, null, null ) );
+
+		$post_id = $this->factory->post->create();
+		$cargo = Cargo::instance();
+		$fn    = Closure::fromCallable( '\\Isotop\\Cargo\\Admin\\push_trash_post' )->bindTo( $cargo );
+
+		$cargo->set_config( ['database' => ['driver' => 'mysql'], 'pusher' => ['driver' => 'http']] );
+		$db   = new MySQL( $cargo );
+		$http = new HTTP( $cargo );
+
+		$cargo->bind( 'driver.database.mysql', $db );
+		$cargo->bind( 'driver.database.http', $http );
+
+		$this->assertFalse( $fn( 'trash', 'publish', get_post( $post_id ) ) );
+
+		add_filter( 'pre_http_request', function () {
+			return ['body' => '{"success":true}'];
+		} );
+
+		$this->assertTrue( $fn( 'trash', 'publish', get_post( $post_id )  ) );
+	}
+
 	public function test_push_delete_post_or_term() {
 		$this->assertFalse( push_delete_post_or_term( null ) );
 
