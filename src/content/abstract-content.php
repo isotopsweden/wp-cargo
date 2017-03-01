@@ -121,7 +121,8 @@ abstract class Abstract_Content implements Content_Interface {
 			}
 
 			if ( $value1 === $value2 || ! is_array( $value2 ) ) {
-				$type = gettype( $value2 );
+				$value2 = $this->cast_string( $value2 );
+				$type   = gettype( $value2 );
 
 				if ( empty( $type ) ) {
 					continue;
@@ -131,7 +132,7 @@ abstract class Abstract_Content implements Content_Interface {
 					'slug'  => $slug,
 					'title' => '',
 					'type'  => $type,
-					'value' => $this->cast_string( $value2 )
+					'value' => $value2
 				];
 			}
 
