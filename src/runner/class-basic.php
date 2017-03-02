@@ -24,7 +24,7 @@ class Basic extends Abstract_Runner {
 		// Push all terms.
 		foreach ( $this->terms() as $term ) {
 			$pusher->send( new Term( $term ) );
-			$this->log_info( sprintf( 'Pushed term with id %d to pusher', $term->ID ) );
+			$this->log_info( sprintf( 'Pushed term with id %d to pusher', $term->term_id ) );
 		}
 
 		// Push all menus.
