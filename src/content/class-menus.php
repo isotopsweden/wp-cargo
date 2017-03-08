@@ -11,15 +11,29 @@ class Menus extends Abstract_Content {
 		$menus  = wp_get_nav_menus();
 		$result = [];
 
+		// Get registered nav manues and nav menu locations.
+		$locations = get_registered_nav_menus();
+		$menu_locations = get_nav_menu_locations();
+
 		foreach ( $menus as $menu ) {
-			$result[] = [
-				'id'    => $menu->term_id,
-				'name'  => $menu->name,
-				'items' => $this->get_menu( $menu ),
-				'extra' => [
+			$item = [
+				'id'        => $menu->term_id,
+				'name'      => $menu->name,
+				'items'     => $this->get_menu( $menu ),
+				'locations' => [],
+				'extra'     => [
 					'site_id' => get_current_blog_id()
 				],
 			];
+
+			// Add menu location slug if any.
+			foreach ( $menu_locations as $location => $id ) {
+				if ( $id === $menu->term_id && isset( $locations[$location] ) ) {
+					$item['locations'][] = $location;
+				}
+			}
+
+			$result[] = $item;
 		}
 
 		// Create menus object.
