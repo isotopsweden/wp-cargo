@@ -4,6 +4,7 @@ namespace Isotop\Tests\Cargo\Admin;
 
 use Closure;
 use Isotop\Cargo\Cargo;
+use WP_Screen;
 
 class Menus_Test extends \WP_UnitTestCase {
 
@@ -24,7 +25,7 @@ class Menus_Test extends \WP_UnitTestCase {
 		} );
 
 		global $current_screen;
-		$current_screen = \WP_Screen::get( 'admin_init' );
+		$current_screen = WP_Screen::get( 'admin_init' );
 
 		$this->assertTrue( $fn() );
 

@@ -4,6 +4,7 @@ namespace Isotop\Tests\Cargo\Admin;
 
 use Closure;
 use Isotop\Cargo\Cargo;
+use WP_Screen;
 
 class Options_Test extends \WP_UnitTestCase {
 
@@ -25,7 +26,7 @@ class Options_Test extends \WP_UnitTestCase {
 		cargo()->set_config( ['content' => ['options' => ['siteurl', 'home']]] );
 
 		global $current_screen;
-		$current_screen = \WP_Screen::get( 'admin_init' );
+		$current_screen = WP_Screen::get( 'admin_init' );
 
 		$this->assertTrue( $fn() );
 
