@@ -35,6 +35,6 @@ class Options_Test extends \WP_UnitTestCase {
 		$options = new Options();
 		$data    = $options->data();
 
-		$this->assertSame( get_current_blog_id(), $data[0]['extra']['site_id'] );
+		$this->assertSame( get_current_blog_id(), $data['extra']['site_id'] );
 	}
 }

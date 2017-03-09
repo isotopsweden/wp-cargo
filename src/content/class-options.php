@@ -5,34 +5,38 @@ namespace Isotop\Cargo\Content;
 class Options extends Abstract_Content {
 
 	/**
+	 * Content type.
+	 *
+	 * @var string
+	 */
+	protected $type = 'options';
+
+	/**
 	 * Options constructor.
 	 */
 	public function __construct() {
 		$slugs  = cargo()->config( 'content.options', [] );
 		$slugs  = is_array( $slugs ) ? $slugs : [];
-		$result = [];
 
+		// Create options data.
+		$options = [];
 		foreach ( $slugs as $slug ) {
-			$result[] = $this->create_item( $slug );
+			if ( $meta = $this->prepare_meta( 0, [$slug => get_option( $slug )] ) ) {
+				$options[] = $meta[0];
+			}
 		}
 
-		$this->create( 'options', $result );
-	}
+		// Bail if empty options array.
+		if ( empty( $options ) ) {
+			return;
+		}
 
-	/**
-	 * Create option item.
-	 *
-	 * @param  string $slug
-	 *
-	 * @return array
-	 */
-	protected function create_item( $slug ) {
-		return [
-			'slug'  => $slug,
-			'value' => get_option( $slug ),
-			'extra' => [
-				'site_id' => get_current_blog_id()
-			]
-		];
+		// Add options data.
+		$this->add( 'options', $options );
+
+		// Add extra data.
+		$this->add( 'extra', [
+			'site_id' => get_current_blog_id()
+		] );
 	}
 }

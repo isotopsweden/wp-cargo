@@ -11,7 +11,7 @@ abstract class Abstract_Content implements Content_Interface {
 	 *
 	 * @var array
 	 */
-	protected $data;
+	protected $data = [];
 
 	/**
 	 * Set action.
@@ -34,7 +34,7 @@ abstract class Abstract_Content implements Content_Interface {
 	 * @param mixed  $value
 	 */
 	public function add( string $key, $value ) {
-		if ( ! $this->valid_data() ) {
+		if ( ! is_array( $this->data ) ) {
 			return;
 		}
 
