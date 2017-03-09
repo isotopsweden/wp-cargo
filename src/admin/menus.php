@@ -14,6 +14,10 @@ function push_menus() {
 		return false;
 	}
 
+	if ( ! is_admin() ) {
+		return false;
+	}
+
 	// Create menus content object.
 	$data = new Menus();
 
@@ -28,7 +32,7 @@ function push_menus() {
 	return $res;
 }
 
-cargo()->action( 'admin_footer', __NAMESPACE__ . '\\push_menus' );
+cargo()->action( 'wp_after_admin_bar_render', __NAMESPACE__ . '\\push_menus' );
 cargo()->action( 'save_post', __NAMESPACE__ . '\\push_menus', 999 );
 cargo()->action( 'created_term', __NAMESPACE__ . '\\push_menus', 999 );
 cargo()->action( 'edit_term', __NAMESPACE__ . '\\push_menus', 999 );

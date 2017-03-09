@@ -14,6 +14,10 @@ function push_options() {
 		return false;
 	}
 
+	if ( ! is_admin() ) {
+		return false;
+	}
+
 	// Create options content object.
 	$data = new Options();
 
@@ -28,7 +32,7 @@ function push_options() {
 	return $res;
 }
 
-cargo()->action( 'admin_footer', __NAMESPACE__ . '\\push_options' );
+cargo()->action( 'wp_after_admin_bar_render', __NAMESPACE__ . '\\push_options' );
 cargo()->action( 'save_post', __NAMESPACE__ . '\\push_options', 999 );
 cargo()->action( 'created_term', __NAMESPACE__ . '\\push_options', 999 );
 cargo()->action( 'edit_term', __NAMESPACE__ . '\\push_options', 999 );

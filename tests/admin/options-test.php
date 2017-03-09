@@ -24,6 +24,11 @@ class Options_Test extends \WP_UnitTestCase {
 
 		cargo()->set_config( ['content' => ['options' => ['siteurl', 'home']]] );
 
+		global $current_screen;
+		$current_screen = \WP_Screen::get( 'admin_init' );
+
 		$this->assertTrue( $fn() );
+
+		$current_screen = null;
 	}
 }

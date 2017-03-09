@@ -5,7 +5,7 @@ namespace Isotop\Tests\Cargo\Admin;
 use Closure;
 use Isotop\Cargo\Cargo;
 
-class Menu_Test extends \WP_UnitTestCase {
+class Menus_Test extends \WP_UnitTestCase {
 
 	public function test_push_menus() {
 		$cargo = Cargo::instance();
@@ -23,6 +23,11 @@ class Menu_Test extends \WP_UnitTestCase {
 			return ['body' => '{"success":true}'];
 		} );
 
+		global $current_screen;
+		$current_screen = \WP_Screen::get( 'admin_init' );
+
 		$this->assertTrue( $fn() );
+
+		$current_screen = null;
 	}
 }
