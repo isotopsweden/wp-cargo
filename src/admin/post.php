@@ -85,7 +85,7 @@ function modify_preview_link( $link, $post ) {
 	}
 
 	// Create preview link.
-	return add_query_arg( $args, $this->config( 'content.preview.url', home_url( '/' ) ) );
+	return add_query_arg( $args, $this->config( 'preview.url', home_url( '/' ) ) );
 }
 
 // Handle preview link.
