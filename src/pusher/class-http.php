@@ -43,7 +43,7 @@ class HTTP extends Abstract_Pusher {
 			return false;
 		}
 
-		if ( $body['success'] ) {
+		if ( isset( $body['success'] ) && $body['success'] ) {
 			return true;
 		}
 
