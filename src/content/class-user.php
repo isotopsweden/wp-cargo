@@ -25,7 +25,7 @@ class User extends Abstract_Content {
 		}
 
 		$this->create( 'user', [
-			'token' => cargo_user_token(),
+			'token' => cargo_user_token( $user ),
 			'user'  => [
 				'id'   => intval( $user->data->ID ),
 				'user' => $user->data->user_login
