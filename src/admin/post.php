@@ -142,12 +142,11 @@ cargo()->action( 'transition_post_status', __NAMESPACE__ . '\\push_trash_post', 
  * Push post or term with a delete notice to external service.
  *
  * @param  int    $id
- * @param  int    $tt_id
  * @param  string $taxonomy
  *
  * @return bool
  */
-function push_delete_post_or_term( $id, $tt_id = 0, $taxonomy = '' ) {
+function push_delete_post_or_term( $id, $taxonomy = '' ) {
 	// Check if there was a multisite switch before.
 	if ( is_multisite() && ms_is_switched() ) {
 		return false;
@@ -158,7 +157,7 @@ function push_delete_post_or_term( $id, $tt_id = 0, $taxonomy = '' ) {
 		return false;
 	}
 
-	if ( empty( $tt_id ) && empty( $taxonomy ) ) {
+	if ( empty( $taxonomy ) ) {
 		$data = new Post( $id );
 	} else {
 		$data = new Term( $id );
@@ -182,4 +181,4 @@ function push_delete_post_or_term( $id, $tt_id = 0, $taxonomy = '' ) {
 cargo()->action( 'delete_post', __NAMESPACE__ . '\\push_delete_post_or_term', 999 );
 
 // Handle terms.
-cargo()->action( 'delete_term', __NAMESPACE__ . '\\push_delete_post_or_term', 999, 3 );
+cargo()->action( 'pre_delete_term', __NAMESPACE__ . '\\push_delete_post_or_term', 999, 2 );
