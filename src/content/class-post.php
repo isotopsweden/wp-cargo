@@ -27,6 +27,15 @@ class Post extends Abstract_Content {
 			return;
 		}
 
+		// Delete all oEmbed caches.
+		if ( class_exists( '\WP_Embed' ) ) {
+			global $wp_embed;
+
+			if ( $wp_embed instanceof \WP_Embed ) {
+				$wp_embed->cache_oembed( $post->ID );
+			}
+		}
+
 		// Apply the content filter before creating post object.
 		$post->post_content = apply_filters( 'the_content', $post->post_content );
 
