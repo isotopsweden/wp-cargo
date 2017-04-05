@@ -98,10 +98,6 @@ class MySQL extends Abstract_Database {
 		$installed_version = intval( get_site_option( '_cargo_table_version', 0 ) );
 
 		if ( $installed_version !== $table_version ) {
-			global $wpdb;
-
-			$wpdb->query( "DROP TABLE IF EXISTS `{$this->get_table()}`" ); // wpcs: unprepared SQL
-
 			$sql = sprintf(
 				'CREATE TABLE %1$s (
 					id int(11) unsigned NOT NULL AUTO_INCREMENT,
