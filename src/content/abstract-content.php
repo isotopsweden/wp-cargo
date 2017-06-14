@@ -164,8 +164,8 @@ abstract class Abstract_Content implements Content_Interface {
 		/**
 		 * Modify content data before it's encoded to JSON.
 		 *
-		 * @param  array $data
-		 * @param  array $type
+		 * @param  array  $data
+		 * @param  string $type
 		 *
 		 * @return array
 		 */
