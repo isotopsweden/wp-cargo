@@ -83,9 +83,13 @@ function modify_preview_link( $link, $post ) {
 			$args[$key] = $post->$value;
 		}
 	}
-
-	// Create preview link.
-	return add_query_arg( $args, $this->config( 'preview.url', home_url( '/' ) ) );
+	
+	/**
+	 * Modify new preview link.
+	 *
+	 * @param string $link
+	 */
+	return add_filter( 'cargo_preview_link', add_query_arg( $args, $this->config( 'preview.url', home_url( '/' ) ) ) );
 }
 
 // Handle preview link.
