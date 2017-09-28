@@ -89,7 +89,7 @@ function modify_preview_link( $link, $post ) {
 	 *
 	 * @param string $link
 	 */
-	return add_filter( 'cargo_preview_link', add_query_arg( $args, $this->config( 'preview.url', home_url( '/' ) ) ) );
+	return apply_filters( 'cargo_preview_link', add_query_arg( $args, $this->config( 'preview.url', home_url( '/' ) ) ) );
 }
 
 // Handle preview link.
