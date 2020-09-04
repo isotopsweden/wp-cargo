@@ -6,7 +6,7 @@
  * Description: Cargo will push content to other services.
  * Author: Isotop
  * Author URI: https://www.isotop.se
- * Version: 1.0.0
+ * Version: 1.0.1
  * Textdomain: wp-cargo
  */
 

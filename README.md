@@ -1,4 +1,4 @@
-# Cargo [![Build Status](https://travis-ci.org/isotopsweden/wp-cargo.svg?branch=master)](https://travis-ci.org/isotopsweden/wp-cargo)
+# Cargo [![Build Status](https://travis-ci.org/isotopsweden/wp-cargo.svg?branch=master)](https://travis-ci.org/isotopsweden/wp-cargo) [![codecov](https://codecov.io/gh/isotopsweden/wp-cargo/branch/master/graph/badge.svg)](https://codecov.io/gh/isotopsweden/wp-cargo)
 
 > Requires PHP 7.1 and WordPress 4.6
 
