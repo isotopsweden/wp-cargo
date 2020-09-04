@@ -18,6 +18,8 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 /**
  * Bootstrap Cargo plugin.
  */
-add_action( 'plugins_loaded', function () {
-	require_once __DIR__ . '/src/bootstrap.php';
-} );
+if ( ! apply_filters( 'dont_bootstrap_cargo_plugin', false ) ) {
+	add_action( 'plugins_loaded', static function () {
+		require_once __DIR__ . '/src/bootstrap.php';
+	} );
+}
