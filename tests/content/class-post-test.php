@@ -60,4 +60,20 @@ class Post_Test extends \WP_UnitTestCase {
 		$this->assertSame( get_permalink( $post_id ), $data['extra']['permalink'] );
 		$this->assertSame( get_current_blog_id(), $data['extra']['site_id'] );
 	}
+
+	public function test_empty_get_type() {
+		$post_id = 0;
+		$post    = new Post( $post_id );
+		$type    = $post->type();
+
+		$this->assertEmpty( $type );
+	}
+
+	public function test_real_get_type() {
+		$post_id = $this->factory->post->create();
+		$post    = new Post( $post_id );
+		$type    = $post->type();
+
+		$this->assertSame( \get_post_type( $post_id ), $type );
+	}
 }

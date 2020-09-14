@@ -37,4 +37,21 @@ class Options_Test extends \WP_UnitTestCase {
 
 		$this->assertSame( get_current_blog_id(), $data['extra']['site_id'] );
 	}
+
+	public function test_empty_get_type() {
+		cargo()->set_config( ['content' => ['options' => false]] );
+		$options = new Options();
+		$type    = $options->type();
+
+		$this->assertSame( 'options', $type );
+	}
+
+	public function test_real_get_type() {
+		cargo()->set_config( ['content' => ['options' => ['siteurl', 'home']]] );
+
+		$options = new Options();
+		$type    = $options->type();
+
+		$this->assertSame( 'options', $type );
+	}
 }

@@ -85,6 +85,15 @@ abstract class Abstract_Content implements Content_Interface {
 	}
 
 	/**
+	 * Get content type.
+	 *
+	 * @return string
+	 */
+	public function type() {
+		return $this->type;
+	}
+
+	/**
 	 * Prepare meta value.
 	 *
 	 * @param  int   $object_id

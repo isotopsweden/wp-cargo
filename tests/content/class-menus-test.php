@@ -35,4 +35,13 @@ class Menus_Test extends \WP_UnitTestCase {
 
 		$this->assertSame( get_current_blog_id(), $data[0]['extra']['site_id'] );
 	}
+
+	public function test_real_get_type() {
+		$this->factory->term->create( ['taxonomy' => 'nav_menu'] );
+
+		$menus = new Menus();
+		$type = $menus->type();
+
+		$this->assertSame( 'menus', $type );
+	}
 }
