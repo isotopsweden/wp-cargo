@@ -76,4 +76,23 @@ class Post_Test extends \WP_UnitTestCase {
 
 		$this->assertSame( \get_post_type( $post_id ), $type );
 	}
+
+	public function test_real_get_action() {
+		$post_id = $this->factory->post->create();
+		$post    = new Post( $post_id );
+		$action  = $post->action();
+
+		$this->assertSame( 'update', $action );
+	}
+
+	public function test_real_change_action_and_get_action() {
+		$expected_action = 'delete';
+		$post_id         = $this->factory->post->create();
+		$post            = new Post( $post_id );
+		$post->set_action( $expected_action );
+		$action = $post->action();
+
+		$this->assertSame( $expected_action, $action );
+	}
+
 }

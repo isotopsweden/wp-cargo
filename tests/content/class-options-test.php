@@ -54,4 +54,12 @@ class Options_Test extends \WP_UnitTestCase {
 
 		$this->assertSame( 'options', $type );
 	}
+	public function test_real_get_action() {
+		cargo()->set_config( ['content' => ['options' => ['siteurl', 'home']]] );
+
+		$options = new Options();
+		$action    = $options->action();
+
+		$this->assertSame( 'update', $action );
+	}
 }

@@ -19,6 +19,13 @@ interface Content_Interface {
 	public function type();
 
 	/**
+	 * Get content action.
+	 *
+	 * @return mixed
+	 */
+	public function action();
+
+	/**
 	 * Convert content data to JSON.
 	 *
 	 * @return mixed

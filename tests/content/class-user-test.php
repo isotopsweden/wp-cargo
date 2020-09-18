@@ -52,4 +52,11 @@ class User_Test extends \WP_UnitTestCase {
 
 		$this->assertSame( 'user', $type );
 	}
+	public function test_real_get_action() {
+		$user_id = $this->factory->user->create( ['role' => 'administrator'] );
+		$user    = new User( $user_id );
+		$action    = $user->action();
+
+		$this->assertSame( 'update', $action );
+	}
 }

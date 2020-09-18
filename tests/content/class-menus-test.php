@@ -44,4 +44,12 @@ class Menus_Test extends \WP_UnitTestCase {
 
 		$this->assertSame( 'menus', $type );
 	}
+	public function test_real_get_action() {
+		$this->factory->term->create( ['taxonomy' => 'nav_menu'] );
+
+		$menus = new Menus();
+		$action = $menus->action();
+
+		$this->assertSame( 'update', $action );
+	}
 }

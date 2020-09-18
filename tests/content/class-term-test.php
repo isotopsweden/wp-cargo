@@ -51,4 +51,11 @@ class Term_Test extends \WP_UnitTestCase {
 
 		$this->assertSame( 'term', $type );
 	}
+	public function test_real_get_action() {
+		$term_id = $this->factory->category->create();
+		$term    = new Term( $term_id );
+		$action    = $term->action();
+
+		$this->assertSame( 'update', $action );
+	}
 }

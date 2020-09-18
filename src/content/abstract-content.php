@@ -94,6 +94,15 @@ abstract class Abstract_Content implements Content_Interface {
 	}
 
 	/**
+	 * Get content action.
+	 *
+	 * @return string
+	 */
+	public function action() {
+		return $this->action;
+	}
+
+	/**
 	 * Prepare meta value.
 	 *
 	 * @param  int   $object_id
