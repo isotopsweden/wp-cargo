@@ -1,4 +1,4 @@
-# Cargo [![Build Status](https://travis-ci.org/isotopsweden/wp-cargo.svg?branch=master)](https://travis-ci.org/isotopsweden/wp-cargo) [![codecov](https://codecov.io/gh/isotopsweden/wp-cargo/branch/master/graph/badge.svg)](https://codecov.io/gh/isotopsweden/wp-cargo)
+# Cargo [![Build Status](https://travis-ci.org/isotopsweden/wp-cargo.svg?branch=master)](https://travis-ci.org/isotopsweden/wp-cargo) [![codecov](https://codecov.io/gh/isotopsweden/wp-cargo/branch/master/graph/badge.svg)](https://codecov.io/gh/isotopsweden/wp-cargo) [![Maintainability](https://api.codeclimate.com/v1/badges/efa790c3c13f5a8ed770/maintainability)](https://codeclimate.com/github/isotopsweden/wp-cargo/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/efa790c3c13f5a8ed770/test_coverage)](https://codeclimate.com/github/isotopsweden/wp-cargo/test_coverage)
 
 > Requires PHP 7.1 and WordPress 4.6
 
