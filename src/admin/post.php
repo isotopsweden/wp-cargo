@@ -36,7 +36,7 @@ function push_post_or_term( $id, $post = null ) {
 	}
 
 	// Send post or taxonomy data to pusher.
-	$res = $this->make( 'pusher' )->send( $data );
+	$res = cargo()->make( 'pusher' )->send( $data );
 
 	// Handle error.
 	if ( is_wp_error( $res ) ) {
@@ -72,7 +72,7 @@ function modify_preview_link( $link, $post ) {
 	];
 
 	// Fetch preview fields.
-	$fields = $this->config( 'preview.fields', ['post_id' => 'ID'] );
+	$fields = cargo()->config( 'preview.fields', ['post_id' => 'ID'] );
 
 	foreach ( $fields as $key => $value ) {
 		if ( is_numeric( $key ) ) {
@@ -89,7 +89,7 @@ function modify_preview_link( $link, $post ) {
 	 *
 	 * @param string $link
 	 */
-	return apply_filters( 'cargo_preview_link', add_query_arg( $args, $this->config( 'preview.url', home_url( '/' ) ) ) );
+	return apply_filters( 'cargo_preview_link', add_query_arg( $args, cargo()->config( 'preview.url', home_url( '/' ) ) ) );
 }
 
 // Handle preview link.
@@ -129,7 +129,7 @@ function push_trash_post( $new_status, $old_status, $post ) {
 	}
 
 	// Send post data to pusher.
-	$res = $this->make( 'pusher' )->send( $data );
+	$res = cargo()->make( 'pusher' )->send( $data );
 
 	// Handle error.
 	if ( is_wp_error( $res ) ) {
@@ -171,7 +171,7 @@ function push_delete_post_or_term( $id, $taxonomy = '' ) {
 	$data->set_action( 'delete' );
 
 	// Send post or taxonomy data to pusher.
-	$res = $this->make( 'pusher' )->send( $data );
+	$res = cargo()->make( 'pusher' )->send( $data );
 
 	// Handle error.
 	if ( is_wp_error( $res ) ) {
