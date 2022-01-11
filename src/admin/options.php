@@ -22,7 +22,7 @@ function push_options() {
 	$data = new Options();
 
 	// Send options to pusher.
-	$res = $this->make( 'pusher' )->send( $data );
+	$res = cargo()->make( 'pusher' )->send( $data );
 
 	// Handle error.
 	if ( is_wp_error( $res ) ) {
