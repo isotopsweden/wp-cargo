@@ -22,7 +22,7 @@ function push_menus() {
 	$data = new Menus();
 
 	// Send menus to pusher.
-	$res = $this->make( 'pusher' )->send( $data );
+	$res = cargo()->make( 'pusher' )->send( $data );
 
 	// Handle error.
 	if ( is_wp_error( $res ) ) {
