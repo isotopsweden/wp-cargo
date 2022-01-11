@@ -16,7 +16,7 @@ function push_login( $user_id, $user ) {
 	$data = new User( $user );
 
 	// Send menu to pusher.
-	$res = $this->make( 'pusher' )->send( $data );
+	$res = cargo()->make( 'pusher' )->send( $data );
 
 	// Handle error.
 	if ( is_wp_error( $res ) ) {
